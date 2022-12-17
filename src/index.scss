@@ -1,0 +1,42 @@
+$pictures: 1, 2, 3, 4, 5, 6;
+
+@keyframes rotate {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+body {
+  perspective: 1100px;
+  background: url(../public/images/bg.png);
+  background-size: 100% auto;
+  section {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 222px auto;
+    background: url(../public/images/img7.png);
+    background-size: cover;
+    transform-style: preserve-3d;
+    animation: rotate 10s linear infinite;
+    &:hover {
+      animation-play-state: paused;
+    }
+
+    @each $pic in $pictures {
+      div:nth-child(#{$pic}) {
+        position: absolute;
+        top: 15%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("../public//images/img" + $pic + ".png") no-repeat;
+        background-size: 80%;
+        transform: rotateY(($pic - 1) * 60deg) translateZ(300px);
+      }
+    }
+  }
+}
